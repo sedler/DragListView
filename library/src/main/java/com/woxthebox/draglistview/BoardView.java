@@ -38,6 +38,7 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static android.support.v7.widget.RecyclerView.NO_POSITION;
 
@@ -752,6 +753,22 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         mLists.add(recyclerView);
         mColumnLayout.addView(layout);
         return recyclerView;
+    }
+
+    public void switchColumn(int from, final int to) {
+        if (from >= 0 && mLists.size() > from && to >= 0 && mLists.size() > to) {
+            Collections.swap(mLists, from, to);
+            View view = mColumnLayout.getChildAt(from);
+            mColumnLayout.removeViewAt(from);
+            mColumnLayout.addView(view, to);
+            //Fix for
+            view.post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollToColumn(to, true);
+                }
+            });
+        }
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
