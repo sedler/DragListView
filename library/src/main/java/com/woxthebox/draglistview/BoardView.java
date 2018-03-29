@@ -527,7 +527,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
             return;
         }
 
-        View parent = (View) mLists.get(column).getParent();
+        View parent = mColumnLayout.getChildAt(column);
         int newX = 0;
         switch (mSnapPosition) {
             case LEFT:
