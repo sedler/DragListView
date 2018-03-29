@@ -523,7 +523,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
     }
 
     public void scrollToColumn(int column, boolean animate) {
-        if (mLists.size() <= column) {
+        if (mColumnLayout.getChildCount() <= column) {
             return;
         }
 
@@ -813,7 +813,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
                     newColumn = closestColumn - 1;
                 }
             }
-            
+
             if (newColumn < 0 || newColumn > mColumnLayout.getChildCount() - 1) {
                 newColumn = newColumn < 0 ? 0 : mColumnLayout.getChildCount() - 1;
             }
