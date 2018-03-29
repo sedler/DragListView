@@ -816,9 +816,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
             if (newColumn < 0 || newColumn > mColumnLayout.getChildCount() - 1) {
                 newColumn = newColumn < 0 ? 0 : mColumnLayout.getChildCount() - 1;
             }
-            if (newColumn < 0 || newColumn > mLists.size() - 1) {
-                newColumn = newColumn < 0 ? 0 : mLists.size() - 1;
-            }
+
             // Calc new scrollX position
             scrollToColumn(newColumn, true);
             return true;
