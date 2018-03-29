@@ -376,8 +376,9 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
     private int getClosestSnapColumn() {
         int column = 0;
         int minDiffX = Integer.MAX_VALUE;
-        for (int i = 0; i < mLists.size(); i++) {
-            View listParent = (View) mLists.get(i).getParent();
+        for (int i = 0; i < mColumnLayout.getChildCount(); i++) {
+
+            View listParent = mColumnLayout.getChildAt(i);
 
             int diffX = 0;
             switch (mSnapPosition) {
@@ -813,9 +814,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
                 }
             }
 
-            if (newColumn < 0 || newColumn > mColumnLayout.getChildCount() - 1) {
-                newColumn = newColumn < 0 ? 0 : mColumnLayout.getChildCount() - 1;
-            }
+
             if (newColumn < 0 || newColumn > mLists.size() - 1) {
                 newColumn = newColumn < 0 ? 0 : mLists.size() - 1;
             }
