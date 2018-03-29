@@ -755,6 +755,17 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         return recyclerView;
     }
 
+    public void addLastColumnView(View view) {
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setLayoutParams(new LayoutParams(mColumnWidth, LayoutParams.MATCH_PARENT));
+        layout.addView(view);
+        if (mColumnLayout.getChildCount() > mLists.size()) {
+            mColumnLayout.removeViewAt(mColumnLayout.getChildCount() - 1);
+        }
+        mColumnLayout.addView(layout);
+    }
+
     public void switchColumn(int from, final int to) {
         if (from >= 0 && mLists.size() > from && to >= 0 && mLists.size() > to) {
             Collections.swap(mLists, from, to);
