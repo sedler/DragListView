@@ -139,27 +139,27 @@ public class DragItemRecyclerView extends RecyclerView implements AutoScroller.A
         return super.onInterceptTouchEvent(event);
     }
 
-    void setDragEnabled(boolean enabled) {
+    public void setDragEnabled(boolean enabled) {
         mDragEnabled = enabled;
     }
 
-    boolean isDragEnabled() {
+    public boolean isDragEnabled() {
         return mDragEnabled;
     }
 
-    void setCanNotDragAboveTopItem(boolean canNotDragAboveTop) {
+    public void setCanNotDragAboveTopItem(boolean canNotDragAboveTop) {
         mCanNotDragAboveTop = canNotDragAboveTop;
     }
 
-    void setCanNotDragBelowBottomItem(boolean canNotDragBelowBottom) {
+    public void setCanNotDragBelowBottomItem(boolean canNotDragBelowBottom) {
         mCanNotDragBelowBottom = canNotDragBelowBottom;
     }
 
-    void setScrollingEnabled(boolean scrollingEnabled) {
+    public void setScrollingEnabled(boolean scrollingEnabled) {
         mScrollingEnabled = scrollingEnabled;
     }
 
-    void setDisableReorderWhenDragging(boolean disableReorder) {
+    public void setDisableReorderWhenDragging(boolean disableReorder) {
         mDisableReorderWhenDragging = disableReorder;
     }
 
@@ -168,23 +168,23 @@ public class DragItemRecyclerView extends RecyclerView implements AutoScroller.A
         mDropTargetForegroundDrawable = foregroundDrawable;
     }
 
-    void setDragItemListener(DragItemListener listener) {
+    public void setDragItemListener(DragItemListener listener) {
         mListener = listener;
     }
 
-    void setDragItemCallback(DragItemCallback callback) {
+    public void setDragItemCallback(DragItemCallback callback) {
         mDragCallback = callback;
     }
 
-    void setDragItem(DragItem dragItem) {
+    public void setDragItem(DragItem dragItem) {
         mDragItem = dragItem;
     }
 
-    boolean isDragging() {
+    public boolean isDragging() {
         return mDragState != DragState.DRAG_ENDED;
     }
 
-    long getDragItemId() {
+    public long getDragItemId() {
         return mDragItemId;
     }
 
