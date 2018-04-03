@@ -774,12 +774,12 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
             mColumnLayout.removeViewAt(from);
             mColumnLayout.addView(view, to);
             //Fix for
-            view.postDelayed(new Runnable() {
+            view.post(new Runnable() {
                 @Override
                 public void run() {
-                    scrollToColumn(to, true);
+                    scrollTo(to * mColumnWidth, 0);
                 }
-            }, 100);
+            });
         }
     }
 
