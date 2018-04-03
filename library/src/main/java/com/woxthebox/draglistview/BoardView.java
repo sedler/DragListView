@@ -773,7 +773,13 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
             View view = mColumnLayout.getChildAt(from);
             mColumnLayout.removeViewAt(from);
             mColumnLayout.addView(view, to);
-            smoothScrollTo(to * mColumnWidth, 0);
+
+            view.post(new Runnable() {
+                @Override
+                public void run() {
+                    smoothScrollTo(to * mColumnWidth, 0);
+                }
+            });
         }
     }
 
