@@ -760,10 +760,14 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         LinearLayout layout = new LinearLayout(getContext());
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setLayoutParams(new LayoutParams(mColumnWidth, LayoutParams.MATCH_PARENT));
+        layout.setTag("LAST_COLUMN");
         layout.addView(view);
-        if (mColumnLayout.getChildCount() > mLists.size()) {
-            mColumnLayout.removeViewAt(mColumnLayout.getChildCount() - 1);
+
+        View existingLastView = mColumnLayout.findViewWithTag("LAST_COLUMN");
+        if (existingLastView != null) {
+            mColumnLayout.removeView(existingLastView);
         }
+
         mColumnLayout.addView(layout);
     }
 
