@@ -767,14 +767,14 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         mColumnLayout.addView(layout);
     }
 
-    public void switchColumn(int from, final int to) {
+    public void switchColumn(int from, final int to, boolean scroll) {
         if (from >= 0 && mLists.size() > from && to >= 0 && mLists.size() > to) {
             Collections.swap(mLists, from, to);
             View view = mColumnLayout.getChildAt(from);
             mColumnLayout.removeViewAt(from);
             mColumnLayout.addView(view, to);
 
-            if (mCurrentColumn == from) {
+            if (scroll) {
                 view.post(new Runnable() {
                     @Override
                     public void run() {
