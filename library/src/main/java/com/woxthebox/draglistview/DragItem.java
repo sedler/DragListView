@@ -94,7 +94,7 @@ public class DragItem {
         mSnapToTouch = snapToTouch;
     }
 
-    public View getDragItemView() {
+    View getDragItemView() {
         return mDragView;
     }
 
@@ -195,7 +195,7 @@ public class DragItem {
         updatePosition();
     }
 
-    private void updatePosition() {
+    public void updatePosition() {
         if (mCanDragHorizontally) {
             mDragView.setX(mPosX + mOffsetX + mAnimationDx - mDragView.getMeasuredWidth() / 2);
         }
