@@ -94,7 +94,7 @@ public class DragItem {
         mSnapToTouch = snapToTouch;
     }
 
-    View getDragItemView() {
+    public View getDragItemView() {
         return mDragView;
     }
 
