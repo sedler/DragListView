@@ -414,7 +414,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         return mSnapToColumnWhenDragging && (isPortrait || mSnapToColumnInLandscape);
     }
 
-    private boolean isDragging() {
+    public boolean isDragging() {
         return mCurrentRecyclerView != null && mCurrentRecyclerView.isDragging();
     }
 
