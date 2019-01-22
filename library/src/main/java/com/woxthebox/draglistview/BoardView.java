@@ -780,7 +780,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
             
             if (from == mCurrentColumn) {
                 mCurrentColumn = to;
-            } else if (from < mCurrentColumn && to > mCurrentColumn) {
+            } else if (from < mCurrentColumn && to >= mCurrentColumn) {
                 mCurrentColumn--;
             } else if (from > mCurrentColumn && to <= mCurrentColumn) {
                 mCurrentColumn++;
