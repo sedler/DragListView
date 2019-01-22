@@ -793,6 +793,8 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
                 });
             }
         }
+        
+        Log.e("DEV", "scrollTo from: " + from + "   to: " + to + "currentColumn: " + mCurrentColumn);
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
