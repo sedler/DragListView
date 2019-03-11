@@ -40,6 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static android.support.v7.widget.RecyclerView.NO_POSITION;
 
@@ -417,8 +418,9 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
     private int getClosestSnapColumn() {
         int column = 0;
         int minDiffX = Integer.MAX_VALUE;
-        for (int i = 0; i < mLists.size(); i++) {
-            View listParent = (View) mLists.get(i).getParent();
+        for (int i = 0; i < mColumnLayout.getChildCount(); i++) {
+
+            View listParent = mColumnLayout.getChildAt(i);
 
             int diffX = 0;
             switch (mSnapPosition) {
@@ -458,7 +460,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         return mCurrentRecyclerView != null && mDragColumn.isDragging();
     }
 
-    private boolean isDragging() {
+    public boolean isDragging() {
         return mCurrentRecyclerView != null && (mCurrentRecyclerView.isDragging() || isDraggingColumn());
     }
 
@@ -579,11 +581,11 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
     }
 
     public void scrollToColumn(int column, boolean animate) {
-        if (mLists.size() <= column) {
+        if (mColumnLayout.getChildCount() <= column) {
             return;
         }
 
-        View parent = (View) mLists.get(column).getParent();
+        View parent = mColumnLayout.getChildAt(column);
         int newX = 0;
         switch (mSnapPosition) {
             case LEFT:
@@ -924,6 +926,41 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         return recyclerView;
     }
 
+    public void addLastColumnView(View view) {
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setLayoutParams(new LayoutParams(mColumnWidth, LayoutParams.MATCH_PARENT));
+        layout.setTag("LAST_COLUMN");
+        layout.addView(view);
+
+        View existingLastView = mColumnLayout.findViewWithTag("LAST_COLUMN");
+        if (existingLastView != null) {
+            mColumnLayout.removeView(existingLastView);
+        }
+
+        mColumnLayout.addView(layout);
+    }
+
+    public void switchColumn(int from, final int to) {
+        if (from >= 0 && mLists.size() > from && to >= 0 && mLists.size() > to) {
+            Collections.swap(mLists, from, to);
+            View view = mColumnLayout.getChildAt(from);
+            mColumnLayout.removeViewAt(from);
+            mColumnLayout.addView(view, to);
+            
+            if (from == mCurrentColumn) {
+                mCurrentColumn = to;
+            } else if (from < mCurrentColumn && to >= mCurrentColumn) {
+                mCurrentColumn--;
+            } else if (from > mCurrentColumn && to <= mCurrentColumn) {
+                mCurrentColumn++;
+            } else {
+                return; // scrollTo not necessary because mCurrentColumn hasn't changed
+            }
+            scrollTo(mCurrentColumn * mColumnWidth, 0);
+        }
+    }
+
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         private float mStartScrollX;
         private int mStartColumn;
@@ -955,8 +992,8 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
                 }
             }
 
-            if (newColumn < 0 || newColumn > mLists.size() - 1) {
-                newColumn = newColumn < 0 ? 0 : mLists.size() - 1;
+            if (newColumn < 0 || newColumn > mColumnLayout.getChildCount() - 1) {
+                newColumn = newColumn < 0 ? 0 : mColumnLayout.getChildCount() - 1;
             }
 
             // Calc new scrollX position

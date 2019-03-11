@@ -132,15 +132,15 @@ public abstract class DragItemAdapter<T, VH extends DragItemAdapter.ViewHolder> 
         holder.setDragStartCallback(null);
     }
 
-    void setDragStartedListener(DragStartCallback dragStartedListener) {
+    public void setDragStartedListener(DragStartCallback dragStartedListener) {
         mDragStartCallback = dragStartedListener;
     }
 
-    void setDragItemId(long dragItemId) {
+    public void setDragItemId(long dragItemId) {
         mDragItemId = dragItemId;
     }
 
-    void setDropTargetId(long dropTargetId) {
+    public void setDropTargetId(long dropTargetId) {
         mDropTargetId = dropTargetId;
     }
 

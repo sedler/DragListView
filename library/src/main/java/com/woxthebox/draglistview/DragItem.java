@@ -202,13 +202,13 @@ public class DragItem {
         updatePosition();
     }
 
-    void setOffset(float offsetX, float offsetY) {
+    public void setOffset(float offsetX, float offsetY) {
         mOffsetX = offsetX;
         mOffsetY = offsetY;
         updatePosition();
     }
 
-    private void updatePosition() {
+    void updatePosition() {
         if (mCanDragHorizontally) {
             mDragView.setX(mPosX + mOffsetX + mAnimationDx - mDragView.getMeasuredWidth() / 2);
         }
