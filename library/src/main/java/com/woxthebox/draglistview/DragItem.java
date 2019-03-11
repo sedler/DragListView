@@ -31,7 +31,6 @@ import android.widget.FrameLayout;
 public class DragItem {
     protected static final int ANIMATION_DURATION = 250;
     private View mDragView;
-    private View mRealDragView;
 
     private float mOffsetX;
     private float mOffsetY;
@@ -44,7 +43,7 @@ public class DragItem {
     private boolean mCanDragHorizontally = true;
     private boolean mSnapToTouch = true;
 
-    DragItem(Context context) {
+    public DragItem(Context context) {
         mDragView = new View(context);
         hide();
     }
@@ -91,16 +90,12 @@ public class DragItem {
         return mSnapToTouch;
     }
 
-    protected void setSnapToTouch(boolean snapToTouch) {
+    void setSnapToTouch(boolean snapToTouch) {
         mSnapToTouch = snapToTouch;
     }
 
     View getDragItemView() {
         return mDragView;
-    }
-
-    View getRealDragView() {
-        return mRealDragView;
     }
 
     private void show() {
@@ -109,16 +104,10 @@ public class DragItem {
 
     void hide() {
         mDragView.setVisibility(View.GONE);
-        mRealDragView = null;
-    }
-
-    boolean isDragging() {
-        return mDragView.getVisibility() == View.VISIBLE;
     }
 
     void startDrag(View startFromView, float touchX, float touchY) {
         show();
-        mRealDragView = startFromView;
         onBindDragView(startFromView, mDragView);
         onMeasureDragView(startFromView, mDragView);
         onStartDragAnimation(mDragView);
@@ -164,13 +153,11 @@ public class DragItem {
         anim.start();
     }
 
-    @SuppressWarnings("WeakerAccess")
     void setAnimationDx(float x) {
         mAnimationDx = x;
         updatePosition();
     }
 
-    @SuppressWarnings("WeakerAccess")
     void setAnimationDY(float y) {
         mAnimationDy = y;
         updatePosition();

@@ -16,8 +16,6 @@
 
 package com.woxthebox.draglistview;
 
-import android.support.annotation.CallSuper;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
@@ -117,9 +115,8 @@ public abstract class DragItemAdapter<T, VH extends DragItemAdapter.ViewHolder> 
         return mItemList == null ? 0 : mItemList.size();
     }
 
-    @CallSuper
     @Override
-    public void onBindViewHolder(@NonNull VH holder, int position) {
+    public void onBindViewHolder(VH holder, int position) {
         long itemId = getItemId(position);
         holder.mItemId = itemId;
         holder.itemView.setVisibility(mDragItemId == itemId ? View.INVISIBLE : View.VISIBLE);
@@ -127,7 +124,7 @@ public abstract class DragItemAdapter<T, VH extends DragItemAdapter.ViewHolder> 
     }
 
     @Override
-    public void onViewRecycled(@NonNull VH holder) {
+    public void onViewRecycled(VH holder) {
         super.onViewRecycled(holder);
         holder.setDragStartCallback(null);
     }

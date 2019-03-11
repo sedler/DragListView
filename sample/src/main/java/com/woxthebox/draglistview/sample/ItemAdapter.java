@@ -16,7 +16,6 @@
 
 package com.woxthebox.draglistview.sample;
 
-import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,15 +40,14 @@ class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter.ViewHo
         setItemList(list);
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         String text = mItemList.get(position).second;
         holder.mText.setText(text);

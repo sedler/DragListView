@@ -3,7 +3,7 @@ DragListView can be used when you want to be able to re-order items in a list, g
 It also supports horizontal swiping of items in a list.
 
 YouTube demo video<br>
-[![Android drag and drop list and board](http://img.youtube.com/vi/Hxc7l06xhv4/0.jpg)](https://www.youtube.com/watch?v=Hxc7l06xhv4)
+[![Android drag and drop list and board](http://img.youtube.com/vi/tNgevYpyA9E/0.jpg)](https://www.youtube.com/watch?v=DbKqENKCio0)
 
 ## Features
 * Re-order items in a list, grid or board by dragging and dropping with nice animations.
@@ -19,7 +19,7 @@ YouTube demo video<br>
     }
 
     dependencies {
-        compile 'com.github.woxthebox:draglistview:1.6.3'
+        compile 'com.github.woxthebox:draglistview:1.5.4'
     }
 
 Add this to proguard rules, otherwise animations won't work correctly
@@ -186,21 +186,6 @@ List and Grid layouts are used as example in the sample project.
             public void onFocusedColumnChanged(int oldColumn, int newColumn) {
                 Toast.makeText(getContext(), "Focused column changed from " + oldColumn + " to " + newColumn, Toast.LENGTH_SHORT).show();
             }
-
-            @Override
-            public void onColumnDragStarted(int position) {
-                Toast.makeText(getContext(), "Column drag started from " + position, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onColumnDragChangedPosition(int oldPosition, int newPosition) {
-                Toast.makeText(getContext(), "Column changed from " + oldPosition + " to " + newPosition, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onColumnDragEnded(int position) {
-                Toast.makeText(getContext(), "Column drag ended at " + position, Toast.LENGTH_SHORT).show();
-            }
         });
         mBoardView.setBoardCallback(new BoardView.BoardCallback() {
             @Override
@@ -216,14 +201,8 @@ List and Grid layouts are used as example in the sample project.
             }
         });
         ...
-        mBoardView.addColumn(listAdapter, header, null, false);
+        mBoardView.addColumnList(listAdapter, header, false);
 
-  To enable dragging and reordering of columns you need to provide a column drag view when adding the column. It is the view that will
-  start the column drag process when long pressed on. You can also implement a custom column drag item to control the visuals and animations.
-  Check out the sample app to see how it is done. If no custom drag item is used a screenshot of the column will be used instead.
-
-    mBoardView.setCustomColumnDragItem(new MyColumnDragItem(getActivity(), R.layout.column_drag_layout));
-    mBoardView.addColumn(listAdapter, header, columnDragView, false);
 
   For your adapter, extend DragItemAdapter and call setItemList() with a List<T> type. setItemList() can be called anytime later to change the list.
 
